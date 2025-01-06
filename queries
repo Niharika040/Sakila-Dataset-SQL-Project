@@ -4,3 +4,42 @@ select first_name , last_name, count(*) as duplicate
 from customer                                                -- 0 found 
 group by first_name , last_name
 having count(*) >1;
+
+-- checking for null value 
+select * from customer                                      -- 0 found
+where first_name is null or last_name is null;
+
+-- 1. Find Top 5 Most Rented Movies
+SELECT 
+    film.film_id, 
+    film.title, 
+    COUNT(rental.rental_id) AS rental_count
+FROM rental
+JOIN inventory ON rental.inventory_id = inventory.inventory_id   
+JOIN film ON inventory.film_id = film.film_id
+GROUP BY film.film_id, film.title
+ORDER BY rental_count DESC
+LIMIT 5;
+
+-- 2.  Analyze Revenue by Month
+select date_format(payment_date, '%Y-%m') as month,
+sum(amount) as total_revenue
+from payment 
+group by month
+order by month;
+
+-- 3.  Find Customers with the Most Rentals
+select concat(first_name," " ,last_name) as Full_name,  count(rental_id) as rental_count
+from customer
+join rental on customer.customer_id = rental.customer_id
+group by full_name
+order by rental_count desc
+limit 5;
+
+-- 4 . Identify Movies Never Rented
+ SELECT film.title
+FROM film
+LEFT JOIN inventory  ON film.film_id = inventory.film_id
+LEFT JOIN rental  ON inventory.inventory_id = rental.inventory_id
+WHERE rental.rental_id IS NULL;
+
