@@ -22,10 +22,6 @@ The Sakila database includes information about a DVD rental store, with tables s
 - `rental`: Rental transaction records.
 - `payment`: Payment information.
 
-### Database Schema Overview:
-![Sakila Schema](https://downloads.mysql.com/docs/sakila-en.a4.pdf)  
-(Download the schema PDF from the official MySQL website.)
-
 ---
 
 ## Technologies Used
