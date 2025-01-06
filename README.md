@@ -20,7 +20,7 @@ This project demonstrates  SQL concepts and techniques using the Sakila database
 ## Technologies Used
 - **Database**: MySQL
 - **Dataset**: Sakila (sample dataset)
-- **Tools**: MySQL Workbench or any SQL client
+- **Tools**: MySQL Workbench
 
 ---
 
