@@ -14,13 +14,6 @@ This project demonstrates  SQL concepts and techniques using the Sakila database
 5. **Stored Procedures**: Automating queries for actor revenue analysis.
 6. **Query Optimization**: Indexing and analyzing query execution plans for performance improvements.
 
-## Dataset: Sakila
-The Sakila database includes information about a DVD rental store, with tables such as:
-- `film`: Details about the movies.
-- `actor`: Information about actors.
-- `customer`: Customer details.
-- `rental`: Rental transaction records.
-- `payment`: Payment information.
 
 ---
 
