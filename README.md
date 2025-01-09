@@ -25,6 +25,12 @@ This project demonstrates  SQL concepts and techniques using the Sakila database
 
 ---
 
+## Results
+You can view the results in the Sakila png folder  [Results](https://github.com/Niharika040/Sakila-Dataset-SQL-Project/tree/main/Sakila%20png)
+
+
+---
+
 ## Technologies Used
 - **Database**: MySQL
 - **Dataset**: Sakila (sample dataset)
@@ -35,7 +41,7 @@ This project demonstrates  SQL concepts and techniques using the Sakila database
 ## How to Use This Repository
 1. Clone this repository or download the SQL files and images to your local machine.
 2. Execute the queries in your SQL client to analyze the Sakila database.
-3. you can see the result in the Sakila png folder  [Results](https://github.com/Niharika040/Sakila-Dataset-SQL-Project/tree/main/Sakila%20png)
+
 
 
 
