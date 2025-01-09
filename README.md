@@ -6,7 +6,8 @@ This project demonstrates  SQL concepts and techniques using the Sakila database
 ## Features
 1. **Exploratory Analysis**: Understanding the schema, data distribution, and relationships in the Sakila dataset, Checking for duplicates, checking for null values
 2. **Advanced Queries**:
-   -Top 5 Most Rented Movies (1. Find Top 5 Most Rented Movies.png)
+   
+   -Top 5 Most Rented Movies 
    - Analyze Revenue by Month
    - Find Customers with the Most Rentals
    - Identify Movies Never Rented
@@ -35,6 +36,5 @@ This project demonstrates  SQL concepts and techniques using the Sakila database
 1. Clone this repository or download the SQL files and images to your local machine.
 2. Execute the queries in your SQL client to analyze the Sakila database.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+
 
