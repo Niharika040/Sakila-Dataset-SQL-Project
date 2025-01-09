@@ -34,7 +34,6 @@ This project demonstrates  SQL concepts and techniques using the Sakila database
 ## How to Use This Repository
 1. Clone this repository or download the SQL files and images to your local machine.
 2. Execute the queries in your SQL client to analyze the Sakila database.
-3.  view the images in the /results folder to visualize the query outputs.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
