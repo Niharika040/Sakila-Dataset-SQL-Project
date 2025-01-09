@@ -104,6 +104,7 @@ BEGIN
     LIMIT 5;
 END //
 DELIMITER ;
+CALL RecommendMovies('Movie name');
 
 --10. Customer Lifetime Value (CLV) Calculation
 SELECT 
