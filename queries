@@ -43,3 +43,117 @@ LEFT JOIN inventory  ON film.film_id = inventory.film_id
 LEFT JOIN rental  ON inventory.inventory_id = rental.inventory_id
 WHERE rental.rental_id IS NULL;
 
+--5. Top Customers By Total Payments
+select concat(first_name , " " , last_name) as full_name, 
+sum(amount) as total_payment 
+from customer
+join payment on customer.customer_id = payment.customer_id 
+group by customer.customer_id 
+
+--6. Total Revenue by Year
+with revenue_by_year as(
+select year(payment_date) as Year, 
+sum(amount) as total_revenue
+from payment
+group by year(payment_date))
+
+select * from revenue_by_year;
+
+--7. Find Revenue by Actor;
+DELIMITER //
+CREATE PROCEDURE GetRevenueByActor(IN actor_name VARCHAR(50))
+BEGIN
+    SELECT 
+        a.actor_id,
+        CONCAT(a.first_name, ' ', a.last_name) AS actor_name,
+        SUM(p.amount) AS total_revenue
+    FROM actor a
+    JOIN film_actor fa ON a.actor_id = fa.actor_id
+    JOIN inventory i ON fa.film_id = i.film_id
+    JOIN rental r ON i.inventory_id = r.inventory_id
+    JOIN payment p ON r.rental_id = p.rental_id
+    WHERE CONCAT(a.first_name, ' ', a.last_name) = actor_name
+    GROUP BY a.actor_id;
+END //
+DELIMITER ;
+CALL GetRevenueByActor('JULIA ZELLWEGER');
+
+--8. List of all active rentals with customer and film details:
+SELECT 
+    r.rental_id,
+    CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
+    f.title AS film_title,
+    r.rental_date
+FROM rental r
+JOIN customer c ON r.customer_id = c.customer_id
+JOIN inventory i ON r.inventory_id = i.inventory_id
+JOIN film f ON i.film_id = f.film_id
+WHERE r.return_date IS NULL;
+
+--9.  Recommend Movies for a Customer
+DELIMITER //
+CREATE PROCEDURE RecommendMovies(IN customerId INT)
+BEGIN
+    SELECT f.film_id, f.title, COUNT(r.rental_id) AS rentals
+    FROM rental r
+    JOIN inventory i ON r.inventory_id = i.inventory_id
+    JOIN film f ON i.film_id = f.film_id
+    WHERE r.customer_id = customerId
+    GROUP BY f.film_id, f.title
+    ORDER BY rentals DESC
+    LIMIT 5;
+END //
+DELIMITER ;
+
+--10. Customer Lifetime Value (CLV) Calculation
+SELECT 
+    c.customer_id,
+    CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
+    COUNT(p.payment_id) AS total_transactions,
+    SUM(p.amount) AS total_revenue,
+    ROUND(AVG(p.amount), 2) AS avg_spending
+FROM customer c
+JOIN payment p ON c.customer_id = p.customer_id
+GROUP BY c.customer_id, customer_name
+ORDER BY total_revenue DESC;
+
+--11.  Most Popular Actors by Genre
+SELECT 
+    c.name AS category_name,
+    a.actor_id,
+    CONCAT(a.first_name, ' ', a.last_name) AS actor_name,
+    COUNT(r.rental_id) AS rental_count
+FROM rental r
+JOIN inventory i ON r.inventory_id = i.inventory_id
+JOIN film f ON i.film_id = f.film_id
+JOIN film_category fc ON f.film_id = fc.film_id
+JOIN category c ON fc.category_id = c.category_id
+JOIN film_actor fa ON f.film_id = fa.film_id
+JOIN actor a ON fa.actor_id = a.actor_id
+GROUP BY c.category_id, a.actor_id
+ORDER BY c.category_id, rental_count DESC;
+
+--12. Customer Churn Analysis
+SELECT 
+    c.customer_id,
+    CONCAT(c.first_name, ' ', c.last_name) AS customer_name,
+    MAX(r.rental_date) AS last_rental_date
+FROM customer c
+LEFT JOIN rental r ON c.customer_id = r.customer_id
+GROUP BY c.customer_id, customer_name
+HAVING last_rental_date < DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+   OR last_rental_date IS NULL
+ORDER BY last_rental_date;
+
+13. Film Profitability Analysis
+SELECT 
+    f.title,
+    f.replacement_cost,
+    SUM(p.amount) AS total_revenue,
+    SUM(p.amount) - f.replacement_cost AS profit
+FROM film f
+JOIN inventory i ON f.film_id = i.film_id
+JOIN rental r ON i.inventory_id = r.inventory_id
+JOIN payment p ON r.rental_id = p.rental_id
+GROUP BY f.film_id
+ORDER BY profit DESC;
