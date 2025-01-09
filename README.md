@@ -4,15 +4,22 @@
 This project demonstrates  SQL concepts and techniques using the Sakila database, a sample database designed for learning and testing SQL queries. The project includes exploratory analysis, complex queries, stored procedures, CTEs, window functions, and optimization techniques.
 
 ## Features
-1. **Exploratory Analysis**: Understanding the schema, data distribution, and relationships in the Sakila dataset.
+1. **Exploratory Analysis**: Understanding the schema, data distribution, and relationships in the Sakila dataset, Checking for duplicates, checking for null values
 2. **Advanced Queries**:
+   -Top 5 Most Rented Movies
+   - Analyze Revenue by Month
+   - Find Customers with the Most Rentals
+   - Identify Movies Never Rented
    - Top customers by total payments.
+   - Most Popular Actors by Genre.
    - Active rentals with customer and film details.
    - Revenue analysis by year.
-3. **Window Functions**: Rank actors by the number of films they've acted in.
-4. **Common Table Expressions (CTEs)**: Revenue breakdown by year.
-5. **Stored Procedures**: Automating queries for actor revenue analysis.
-6. **Query Optimization**: Indexing and analyzing query execution plans for performance improvements.
+   - Customer Churn Analysis
+   -  Film Profitability Analysis
+4. **Window Functions**: Customer Lifetime Value (CLV) Calculation.
+5. **Common Table Expressions (CTEs)**: Revenue breakdown by year.
+6. **Stored Procedures**: Revenue by Actor, Recommend Movies for a Customer
+
 
 
 ---
