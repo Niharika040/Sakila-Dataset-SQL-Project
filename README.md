@@ -6,7 +6,6 @@ This project demonstrates  SQL concepts and techniques using the Sakila database
 ## Features
 1. **Exploratory Analysis**: Understanding the schema, data distribution, and relationships in the Sakila dataset, Checking for duplicates, checking for null values
 2. **Advanced Queries**:
-   
    -Top 5 Most Rented Movies 
    - Analyze Revenue by Month
    - Find Customers with the Most Rentals
